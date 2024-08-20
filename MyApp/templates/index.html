@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaCep</title>
+</head>
+<body>
+    <h1>Buscar Cep</h1>
+    <form method="post" action="{% url 'search_cep' %}">
+        {% csrf_token %}
+        <label for="estado">Estado: </label>
+        <input type="text" id="state" name="estado" required>
+        <label for="estado">Cidade: </label>
+        <input type="text" id="cidade" name="cidade" required>
+        <label for="estado">Rua: </label>
+        <input type="text" id="rua" name="rua" required>
+
+    </form>
+    
+    {% if cep %}
+        <h2>CEP Encontrado: {{ cep }}</h2>
+    {% endif %}
+</body>
+</html>
