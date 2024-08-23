@@ -25,14 +25,21 @@ def get_pokemon(request):
             name = data.get("forms", [{}])[0].get("name", "").capitalize()
             type_ = data.get("types", [{}])[0].get("type", {}).get("name", "").capitalize()
             image = data.get("sprites", {}).get("front_default", "N/A")
+            image_shiny = data.get("sprites", {}).get("front_shiny", "N/A")
             ability = data.get("abilities", [{}])[0].get("ability", {}).get("name", "").capitalize()
 
             pokemon_info = {
                 "name": name,
                 "type": type_,
                 "image": image,
+                "image_shiny": image_shiny,
                 "ability": ability,
             }
+
+            pokemon, created = Pokemon.objects.update_or_create(
+            name=pokemon_info['name'],
+            defaults=pokemon_info
+            )
 
             context = {'pokemon_info': pokemon_info}
         else:

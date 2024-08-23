@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            position: relative; /* Adicione esta linha */
+            position: relative;
         }
 
         .pokedex-container {
@@ -109,10 +109,35 @@
         .crud-button:hover {
             background-color: #45a049;
         }
+
+        .image-toggle-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .image-toggle-buttons button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffeb3b;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .image-toggle-buttons button.active {
+            background-color: #cddc39;
+        }
+
+        .image-toggle-buttons button:hover:not(.active) {
+            background-color: #cddc39;
+        }
     </style>
 </head>
 <body>
-    <a href="{% url 'crud_page' %}" class="crud-button">CRUD</a> <!-- Botão de CRUD -->
+    <a href="{% url 'crud_page' %}" class="crud-button">CRUD</a>
 
     <div class="pokedex-container">
         <h1>Pokédex</h1>
@@ -124,15 +149,38 @@
 
     {% if pokemon_info %}
         <div class="pokemon-card">
-            <img src="{{ pokemon_info.image }}" alt="Imagem do Pokémon">
+            <img id="pokemon-image" src="{{ pokemon_info.image }}" alt="Imagem do Pokémon">
             <h5>{{ pokemon_info.name }}</h5>
             <p><strong>Tipo:</strong> {{ pokemon_info.type }}</p>
             <p><strong>Habilidade:</strong> {{ pokemon_info.ability }}</p>
+
+            <div class="image-toggle-buttons">
+                <button id="normal-button" class="active" onclick="toggleImage('normal')">Normal</button>
+                <button id="shiny-button" onclick="toggleImage('shiny')">Shiny</button>
+            </div>
         </div>
     {% elif error_message %}
         <div class="pokemon-card">
             <p>{{ error_message }}</p>
         </div>
     {% endif %}
+
+    <script>
+        function toggleImage(type) {
+            const pokemonImage = document.getElementById('pokemon-image');
+            const normalButton = document.getElementById('normal-button');
+            const shinyButton = document.getElementById('shiny-button');
+
+            if (type === 'normal') {
+                pokemonImage.src = "{{ pokemon_info.image }}";
+                normalButton.classList.add('active');
+                shinyButton.classList.remove('active');
+            } else if (type === 'shiny') {
+                pokemonImage.src = "{{ pokemon_info.image_shiny }}";
+                shinyButton.classList.add('active');
+                normalButton.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>
