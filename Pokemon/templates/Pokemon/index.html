@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .pokedex-container {
+            background-color: #f44336;
+            width: 300px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .pokedex-container h1 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .pokedex-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pokedex-container input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .pokedex-container button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffeb3b;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pokedex-container button:hover {
+            background-color: #cddc39;
+        }
+    </style>
+</head>
+<body>
+    <div class="pokedex-container">
+        <h1>Pokédex</h1>
+        <form action="{% url 'get_pokemon' %}" method="get">
+            <input type="text" name="pokemon_name" placeholder="Escreva o nome do Pokémon">
+            <button type="submit">Buscar</button>
+        </form>
+
+        {% if pokemon_info %}
+            <div class="pokemon-info">
+                <img src="{{ pokemon_info.image }}" alt="{{ pokemon_info.name }}">
+                <h2>{{ pokemon_info.name | title }}</h2>
+                <p>Tipo: {{ pokemon_info.type | title }}</p>
+            </div>
+        {% elif error_message %}
+            <div class="error-message">
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

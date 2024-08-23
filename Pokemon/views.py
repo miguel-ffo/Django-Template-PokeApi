@@ -11,10 +11,13 @@ def get_pokemon(request):
 
     if pokemon_name:
         api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
-        response = requests.get('pokemon_name')
-        data = response.json()
+        response = requests.get(api_url)
 
-        if data['Response'] == 'True':
+        if response.status_code == 200:  # Verifica se a requisição foi bem-sucedida
+            data = response.json()
+        
+
+        if data['Response'] == True:
             pokemon_info = {
                 "name": data['forms'][0]['name'],
                 "type": data['type']['name'],
