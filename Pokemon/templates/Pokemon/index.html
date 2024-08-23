@@ -9,10 +9,11 @@
             font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative; /* Adicione esta linha */
         }
 
         .pokedex-container {
@@ -21,6 +22,8 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            margin-bottom: 20px;
         }
 
         .pokedex-container h1 {
@@ -57,27 +60,79 @@
         .pokedex-container button:hover {
             background-color: #cddc39;
         }
+
+        .pokemon-card {
+            background-color: #ffffff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pokemon-card img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .pokemon-card h5 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .pokemon-card p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .crud-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .crud-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
+    <a href="{% url 'crud_page' %}" class="crud-button">CRUD</a> <!-- Botão de CRUD -->
+
     <div class="pokedex-container">
         <h1>Pokédex</h1>
         <form action="{% url 'get_pokemon' %}" method="get">
             <input type="text" name="pokemon_name" placeholder="Escreva o nome do Pokémon">
             <button type="submit">Buscar</button>
         </form>
-
-        {% if pokemon_info %}
-            <div class="pokemon-info">
-                <img src="{{ pokemon_info.image }}" alt="{{ pokemon_info.name }}">
-                <h2>{{ pokemon_info.name | title }}</h2>
-                <p>Tipo: {{ pokemon_info.type | title }}</p>
-            </div>
-        {% elif error_message %}
-            <div class="error-message">
-                <p>{{ error_message }}</p>
-            </div>
-        {% endif %}
     </div>
+
+    {% if pokemon_info %}
+        <div class="pokemon-card">
+            <img src="{{ pokemon_info.image }}" alt="Imagem do Pokémon">
+            <h5>{{ pokemon_info.name }}</h5>
+            <p><strong>Tipo:</strong> {{ pokemon_info.type }}</p>
+            <p><strong>Habilidade:</strong> {{ pokemon_info.ability }}</p>
+        </div>
+    {% elif error_message %}
+        <div class="pokemon-card">
+            <p>{{ error_message }}</p>
+        </div>
+    {% endif %}
 </body>
 </html>
