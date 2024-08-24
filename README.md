@@ -101,7 +101,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#" title="defina o título do link">
         <img src="https://avatars.githubusercontent.com/u/142344702?v=4"width="100px;" alt="Foto do Miguel Figueiredo no GitHub"/><br>
         <sub>
-          <b>Miguel Figueiredo Silva</b>
+          <b>Miguel Figueiredo </b>
         </sub>
       </a>
     </td>
