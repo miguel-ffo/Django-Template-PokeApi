@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pokemon
+from Pokemon.models import Pokemon
 
 class PokemonForm(forms.ModelForm):
     class Meta:

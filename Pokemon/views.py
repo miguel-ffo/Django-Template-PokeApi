@@ -1,11 +1,9 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import  render
 import requests
 from .models import Pokemon
-from .forms import PokemonForm
 
-def crud_view(request):
-    pokemons = Pokemon.objects.all()
-    return render(request, 'Pokemon/crud.html', {'pokemons': pokemons})
+
+
 
 def index(request):
     return render(request, 'Pokemon/index.html')
@@ -48,38 +46,3 @@ def get_pokemon(request):
 
     return render(request, 'Pokemon/index.html', context)
 
-def update_pokemon(request, pk):
-    pokemon = get_object_or_404(Pokemon, pk=pk)
-    
-    if request.method == 'POST':
-        form = PokemonForm(request.POST, instance=pokemon)
-        if form.is_valid():
-            form.save()
-            return redirect('crud_page')  # Corrigido para 'crud_page'
-    else:
-        form = PokemonForm(instance=pokemon)
-    
-    context = {
-        'form': form,
-        'pokemon': pokemon
-    }
-    return render(request, 'Pokemon/update_pokemon.html', context)
-
-def create_pokemon(request):
-    if request.method == 'POST':
-        form = PokemonForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('crud_page')  # Corrigido para 'crud_page'
-    else:
-        form = PokemonForm()
-    
-    return render(request, 'Pokemon/create_pokemon.html', {'form': form})
-
-def delete_pokemon(request, pk):
-    pokemon = get_object_or_404(Pokemon, pk=pk)
-    if request.method == 'POST':
-        pokemon.delete()
-        return redirect('crud_page')  # Corrigido para 'crud_page'
-    
-    return render(request, 'Pokemon/delete_pokemon.html', {'pokemon': pokemon})

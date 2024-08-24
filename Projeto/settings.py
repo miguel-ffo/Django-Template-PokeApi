@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Pokemon',
     'django',
     'requests',
+    'Crud',
 ]
 
 MIDDLEWARE = [
