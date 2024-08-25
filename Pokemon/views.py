@@ -2,9 +2,6 @@ from django.shortcuts import  render
 import requests
 from .models import Pokemon
 
-
-
-
 def index(request):
     return render(request, 'Pokemon/index.html')
 
@@ -31,8 +28,6 @@ def get_pokemon(request):
                 "image_shiny": image_shiny,
                 "ability": ability,
             }
-
-            # Atualiza ou cria o Pokémon no banco de dados
             pokemon, created = Pokemon.objects.update_or_create(
                 name=pokemon_info['name'],
                 defaults=pokemon_info

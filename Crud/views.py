@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, redirect, render
-
 from Pokemon.models import Pokemon
 from .forms import PokemonForm
 
@@ -14,7 +13,7 @@ def update_pokemon(request, pk):
         form = PokemonForm(request.POST, instance=pokemon)
         if form.is_valid():
             form.save()
-            return redirect('crud_page')  # Corrigido para 'crud_page'
+            return redirect('crud_page')  
     else:
         form = PokemonForm(instance=pokemon)
     
@@ -29,7 +28,7 @@ def create_pokemon(request):
         form = PokemonForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('crud_page')  # Corrigido para 'crud_page'
+            return redirect('crud_page')  
     else:
         form = PokemonForm()
     
@@ -39,6 +38,6 @@ def delete_pokemon(request, pk):
     pokemon = get_object_or_404(Pokemon, pk=pk)
     if request.method == 'POST':
         pokemon.delete()
-        return redirect('crud_page')  # Corrigido para 'crud_page'
+        return redirect('crud_page')  
     
     return render(request, 'Crud/delete_pokemon.html', {'pokemon': pokemon})
