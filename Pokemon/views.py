@@ -17,8 +17,8 @@ def get_pokemon(request):
 
             name = data.get("forms", [{}])[0].get("name", "").capitalize()
             type_ = data.get("types", [{}])[0].get("type", {}).get("name", "").capitalize()
-            image = data.get("sprites", {}).get("front_default", "N/A")
-            image_shiny = data.get("sprites", {}).get("front_shiny", "N/A")
+            image = data.get("sprites", {}).get("other", {}).get("showdown", {}).get("front_default", "N/D")
+            image_shiny = data.get("sprites", {}).get("other", {}).get("showdown", {}).get("front_shiny", "N/D")
             ability = data.get("abilities", [{}])[0].get("ability", {}).get("name", "").capitalize()
 
             pokemon_info = {
