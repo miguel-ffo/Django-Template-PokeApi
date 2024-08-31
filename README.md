@@ -67,6 +67,16 @@ Com o ambiente virtual ativado, instale as dependências do projeto listadas no 
 pip install -r requirements.txt
 ```
 
+Configure a senha do seu root no MySQL no script_db.py :
+
+```
+root_connection = MySQLdb.connect(user='root', passwd='seu_password', host=db_host)  # Atualize com a senha do root
+```
+Rode o script_db.py:
+
+```
+python manage.py script_db.py
+```
 Aplique as migrações:
 
 As migrações são necessárias para criar e atualizar o esquema do banco de dados. Aplique as migrações com os seguintes comandos:
