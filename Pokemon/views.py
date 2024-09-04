@@ -2,9 +2,13 @@ from django.shortcuts import  render
 import requests
 from .models import Pokemon
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def index(request):
     return render(request, 'Pokemon/index.html')
 
+@login_required
 def get_pokemon(request):
     pokemon_name = request.GET.get('pokemon_name', '').lower()
 
@@ -17,8 +21,8 @@ def get_pokemon(request):
 
             name = data.get("forms", [{}])[0].get("name", "").capitalize()
             type_ = data.get("types", [{}])[0].get("type", {}).get("name", "").capitalize()
-            image = data.get("sprites", {}).get("other", {}).get("showdown", {}).get("front_default", "N/D")
-            image_shiny = data.get("sprites", {}).get("other", {}).get("showdown", {}).get("front_shiny", "N/D")
+            image = data.get("sprites", {}).get("other", {}).get("official-artwork", {}).get("front_default", "N/A")
+            image_shiny = data.get("sprites", {}).get("other", {}).get("official-artwork", {}).get("front_shiny", "N/A")
             ability = data.get("abilities", [{}])[0].get("ability", {}).get("name", "").capitalize()
 
             pokemon_info = {
