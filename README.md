@@ -11,6 +11,7 @@
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - Você instalou a versão mais recente de `<Python>`
+- Você instalou a versão mais recente de `<MySQL>`
 - Você tem uma máquina `<Windows / Linux / Mac>`.
 
 
@@ -27,7 +28,7 @@ cd /caminho/para/seu/diretorio
 Execute o comando git clone:
 
 ```
-git clone https://github.com/miguel-ffo/whorkshop-fabrica-2024.2-miguel.git
+git clone https://github.com/miguel-ffo/Django-Template-PokeApi.git
 ```
 
 
@@ -39,7 +40,7 @@ Para usar PokeApi, siga estas etapas:
 Acesse o diretório do repositório clonado: Após a clonagem, você pode entrar no diretório do repositório com:
 
 ```
-cd whorkshop-fabrica-2024.2-miguel
+cd Django-Template-PokeApi
 ```
 Crie um ambiente virtual:
 
@@ -70,7 +71,7 @@ pip install -r requirements.txt
 Configure a senha do seu root no MySQL no script_db.py :
 
 ```
-root_connection = MySQLdb.connect(user='root', passwd='seu_password', host=db_host)  # Atualize com a senha do root
+"root_connection = MySQLdb.connect(user='root', passwd='seu_password', host=db_host) " # Atualize com a senha do root
 ```
 Rode o script_db.py:
 
